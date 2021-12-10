@@ -1,0 +1,128 @@
+PROTOCOLLO DI COMUNICAZIONE:
+
+----------------------------------------
+Fase di Connessione con l'altro player:
+Inserimento indirizzo IP.
+Invia ->  “c;nickname”;
+Attende -> “y;nickname”;
+Invia “n”;
+
+----------------------------------------
+Fase di Selezione Giocatore:
+“S:numerogiocatore”
+
+---------------------------------------
+Fase di Gioco:
+inizio -> “m:a/d/space/k/l”;
+
+a → sinistra
+d → destra
+space → salto
+spacek → salto+calcio
+k → calcio
+l → super
+
+—------------------------------------
+Movimento palla
+campo diviso in due e ci si invia la propia x moltiplicata per -1
+
+ 
+
+Da testare per decidere quale è la migliore:
+“p;direzione;velocità”
+“p;coordinataX;coordinataY”
+“p;coordinataX;coordinataY;velocità”
+
+
+
+
+
+
+
+---------------------------------------
+Fase di Chiusura:
+Invia “e”;
+
+
+
+
+
+
+c
+y
+n
+s
+e
+m
+a
+d
+space
+k
+p
+
+
+
+
+
+
+
+
+
+
+
+
+
+Giocatore
+-------------------------------------------------------------------------------------------------------------------
+Nome personaggio
+Immagine
+Pos_x
+Pos_y
+Velocita	 (numero di pixel di cui si sposta in una volta)
+Mossa 
+Frame
+Barra mossa	(di fianco al punteggio)
+
+Palla
+-------------------------------------------------------------------------------------------------------------------
+Pos_x
+Pos_y
+Velocita 	1 (normale) | 2 (tiro speciale)
+Immagine
+Direzione 	radianti
+Frame
+
+
+Per la gestione del campo usiamo misure relativa (cioe grandezza del frame) e non assolute (tipo numeri)
+
+Campo
+-------------------------------------------------------------------------------------------------------------------
+Immagine
+Pavimento
+Porta  oggetto
+Palla  oggetto
+Giocatore  oggetto
+Punteggio  oggetto
+
+
+Della pota vediamo entrambi i pali e usiamo sempre grandezze relative
+
+Porta
+-------------------------------------------------------------------------------------------------------------------
+Altezza
+Larghezza
+Linea goal
+
+
+
+
+Punteggio
+-------------------------------------------------------------------------------------------------------------------
+Punteggio squadra 1
+Punteggio squadra 2
+Timer  oggetto
+
+
+Timer
+-------------------------------------------------------------------------------------------------------------------
+Countdown quando arriva a zero finisce la partita e termina la comunicazione, dopo si vede il risultato
