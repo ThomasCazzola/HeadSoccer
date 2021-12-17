@@ -1,12 +1,13 @@
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\bin\Debug\HeadSoccer.exe.config
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\bin\Debug\HeadSoccer.exe
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\bin\Debug\HeadSoccer.pdb
-E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.csproj.AssemblyReference.cache
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\MainWindow.g.cs
+E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\SelectPlayer.g.cs
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\App.g.cs
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer_MarkupCompile.cache
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer_MarkupCompile.lref
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\MainWindow.baml
+E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\SelectPlayer.baml
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.g.resources
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.Properties.Resources.resources
 E:\Oricchio\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.csproj.GenerateResource.cache

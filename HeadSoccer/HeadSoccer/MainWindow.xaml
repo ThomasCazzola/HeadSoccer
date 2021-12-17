@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeadSoccer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown">
+        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" >
     <Grid>
-        <Image x:Name="imgPlayer" HorizontalAlignment="Left" Height="100" Margin="95,225,0,0" VerticalAlignment="Top" Width="100"/>
+        <Canvas x:Name="myCanvas" HorizontalAlignment="Left" Height="420" Margin="1,-1,-1,0" VerticalAlignment="Top" Width="792">
+            <Image x:Name="Player" Height="100" Canvas.Left="78" Canvas.Top="241" Width="100" Source="player1.png"/>
+            <Image x:Name="ground" Height="55" Canvas.Left="2" Canvas.Top="365" Width="792"/>
+        </Canvas>
     </Grid>
 </Window>

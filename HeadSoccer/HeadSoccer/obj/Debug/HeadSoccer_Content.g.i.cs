@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("provaimmagine.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("player1.png")]
 
 
