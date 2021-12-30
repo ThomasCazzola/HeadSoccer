@@ -5,11 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeadSoccer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" >
-    <Grid>
-        <Canvas x:Name="myCanvas" HorizontalAlignment="Left" Height="420" Margin="1,-1,-1,0" VerticalAlignment="Top" Width="792">
-            <Image x:Name="Player" Height="100" Canvas.Left="78" Canvas.Top="241" Width="100" Source="player1.png"/>
-            <Image x:Name="ground" Height="55" Canvas.Left="2" Canvas.Top="365" Width="792"/>
-        </Canvas>
-    </Grid>
+        Title="Head Soccer" Height="450" Width="653" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" 
+        WindowState="Maximized">
+    <Window.Background>
+        <ImageBrush ImageSource="images/background.png"></ImageBrush>
+    </Window.Background>
+
+    <Canvas x:Name="myCanvas" HorizontalAlignment="Left" Height="451" Margin="1,-1,0,0" VerticalAlignment="Top" Width="800">
+        <Image x:Name="Player" Height="100" Canvas.Left="600" Canvas.Top="200" Width="100" Tag="player" Source="images/player1.png"/>
+        <Image x:Name="Palla" Height="100" Canvas.Left="910" Canvas.Top="460" Width="100" Tag="palla" Source="images/palla.png"/>
+        <Image x:Name="Ground" Height="100" Canvas.Left="-32" Canvas.Top="942" Width="2523" Tag="ground" Source="images/ground.png"/>
+        <Label x:Name="TempoEPunt" Height="50" Canvas.Left="900" Canvas.Top="5" Width="120" Tag="Time" Background="#FFE4E0E0"/>
+    </Canvas>
 </Window>
