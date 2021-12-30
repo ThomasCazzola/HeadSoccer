@@ -14,7 +14,8 @@
     <Canvas x:Name="myCanvas" HorizontalAlignment="Left" Height="451" Margin="1,-1,0,0" VerticalAlignment="Top" Width="800">
         <Image x:Name="Player" Height="100" Canvas.Left="600" Canvas.Top="200" Width="100" Tag="player" Source="images/player1.png"/>
         <Image x:Name="Palla" Height="100" Canvas.Left="910" Canvas.Top="460" Width="100" Tag="palla" Source="images/palla.png"/>
-        <Image x:Name="Ground" Height="100" Canvas.Left="-32" Canvas.Top="942" Width="2523" Tag="ground" Source="images/ground.png"/>
+        <Image x:Name="Ground" Height="100" Canvas.Left="-32" Canvas.Top="942" Width="1921" Tag="ground" Source="images/ground.png"/>
         <Label x:Name="TempoEPunt" Height="50" Canvas.Left="900" Canvas.Top="5" Width="120" Tag="Time" Background="#FFE4E0E0"/>
+        
     </Canvas>
 </Window>
