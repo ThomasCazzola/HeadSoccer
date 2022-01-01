@@ -19,10 +19,12 @@ namespace HeadSoccer
         Rect playerHitBox, ballHitBox, groundHitBox;
         Random r = new Random();
         int dirPalla = 0;
+        Giocatore giocatore = null;
 
         public MainWindow(int index)
         {
             InitializeComponent();
+            ControllaGiocatoreSelezionato(index);
             gameTimer.Tick += gameEngine;
             gameTimer.Interval = TimeSpan.FromMilliseconds(1000 / 120);
             StartGame();
@@ -30,7 +32,6 @@ namespace HeadSoccer
             playerHitBox = new Rect(Canvas.GetLeft(Player), Canvas.GetTop(Player), Player.ActualWidth, Player.ActualHeight);
             ballHitBox = new Rect(Canvas.GetLeft(Palla), Canvas.GetTop(Palla), Palla.ActualWidth, Palla.ActualHeight);
             groundHitBox = new Rect(Canvas.GetLeft(Ground), Canvas.GetTop(Ground), Ground.ActualWidth, Ground.ActualHeight);
-            ControllaGiocatoreSelezionato(index);
         }
 
         private void gameEngine(object sender, EventArgs e)
@@ -41,11 +42,11 @@ namespace HeadSoccer
             Canvas.SetTop(Player, Canvas.GetTop(Player) + gravity);
             if (goDx)
             {
-                Canvas.SetLeft(Player, Canvas.GetLeft(Player) + 10);
+                Canvas.SetLeft(Player, Canvas.GetLeft(Player) + giocatore.getVel());
             }
             if (goSx)
             {
-                Canvas.SetLeft(Player, Canvas.GetLeft(Player) - 5);
+                Canvas.SetLeft(Player, Canvas.GetLeft(Player) - giocatore.getVel());
             }
             if (!intercPalla1)
             {
@@ -106,8 +107,8 @@ namespace HeadSoccer
             gameTimer.Start();
             myCanvas.Focus();
             //gameOver = false;
-            Canvas.SetTop(Player, 600);
-            Canvas.SetLeft(Player, 200);
+            Canvas.SetTop(Player, giocatore.getPosX());
+            Canvas.SetLeft(Player, giocatore.getPosY());
         }
 
         private void EndGame()
@@ -144,19 +145,24 @@ namespace HeadSoccer
                 case 0:
                     return;
                 case 1:
-                    Player.Source = new BitmapImage(new Uri(@"images/player1.png", UriKind.Relative));
+                    giocatore = new Giocatore("Player1", new BitmapImage(new Uri(@"images/player1.png", UriKind.Relative)), 600, 200, 10, "Air snow storm shot");
+                    Player.Source = giocatore.getImmagine();
                     break;
                 case 2:
-                    Player.Source = new BitmapImage(new Uri(@"images/player2.png", UriKind.Relative));
+                    giocatore = new Giocatore("Player2", new BitmapImage(new Uri(@"images/player2.png", UriKind.Relative)), 600, 200, 10, "Blue area shot");
+                    Player.Source = giocatore.getImmagine();
                     break;
                 case 3:
-                    Player.Source = new BitmapImage(new Uri(@"images/player3.png", UriKind.Relative));
+                    giocatore = new Giocatore("Player3", new BitmapImage(new Uri(@"images/player3.png", UriKind.Relative)), 600, 200, 10, "Power shots");
+                    Player.Source = giocatore.getImmagine();
                     break;
                 case 4:
-                    Player.Source = new BitmapImage(new Uri(@"images/player4.png", UriKind.Relative));
+                    giocatore = new Giocatore("Player4", new BitmapImage(new Uri(@"images/player4.png", UriKind.Relative)), 600, 200, 10, "Sand shot");
+                    Player.Source = giocatore.getImmagine();
                     break;
                 case 5:
-                    Player.Source = new BitmapImage(new Uri(@"images/player5.png", UriKind.Relative));
+                    giocatore = new Giocatore("Player5", new BitmapImage(new Uri(@"images/player5.png", UriKind.Relative)), 600, 200, 10, "Military shot");
+                    Player.Source = giocatore.getImmagine();
                     break;
                 default:
                     break;
