@@ -57,6 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Giocatore.cs" />
+    <Compile Include="Palla.cs" />
     <Compile Include="SelectPlayer.xaml.cs">
       <DependentUpon>SelectPlayer.xaml</DependentUpon>
     </Compile>

@@ -12,26 +12,27 @@ namespace HeadSoccer
     /// </summary>
     public partial class MainWindow : Window
     {
-        DispatcherTimer gameTimer = new DispatcherTimer();
+        DispatcherTimer gameTimer = new DispatcherTimer(DispatcherPriority.Normal);
         //bool gameOver = false;
-        bool goDx, goSx, intercPalla1; //intercPalla2;
+        bool goDx, goSx, intercPalla1, jumping; //intercPalla2;
         int gravity = 8, ballGravity = 5;
-        Rect playerHitBox, ballHitBox, groundHitBox;
+        Rect playerHitBox, ballHitBox, groundHitBox, campoHitBox;
         Random r = new Random();
-        int dirPalla = 0;
         Giocatore giocatore = null;
+        Palla palla = null;
+        int dirPalla;
 
         public MainWindow(int index)
         {
             InitializeComponent();
             ControllaGiocatoreSelezionato(index);
             gameTimer.Tick += gameEngine;
-            gameTimer.Interval = TimeSpan.FromMilliseconds(1000 / 120);
+            gameTimer.Interval = TimeSpan.FromMilliseconds(20);
             StartGame();
-            dirPalla = GeneraDirPallaRandom();
-            playerHitBox = new Rect(Canvas.GetLeft(Player), Canvas.GetTop(Player), Player.ActualWidth, Player.ActualHeight);
-            ballHitBox = new Rect(Canvas.GetLeft(Palla), Canvas.GetTop(Palla), Palla.ActualWidth, Palla.ActualHeight);
+            playerHitBox = new Rect(giocatore.posX, giocatore.posY, Player.ActualWidth, Player.ActualHeight);
+            ballHitBox = new Rect(palla.pos_X - 20, palla.pos_Y - 20, Palla.ActualWidth, Palla.ActualHeight);
             groundHitBox = new Rect(Canvas.GetLeft(Ground), Canvas.GetTop(Ground), Ground.ActualWidth, Ground.ActualHeight);
+            dirPalla = palla.direzione;
         }
 
         private void gameEngine(object sender, EventArgs e)
@@ -42,11 +43,11 @@ namespace HeadSoccer
             Canvas.SetTop(Player, Canvas.GetTop(Player) + gravity);
             if (goDx)
             {
-                Canvas.SetLeft(Player, Canvas.GetLeft(Player) + giocatore.getVel());
+                Canvas.SetLeft(Player, Canvas.GetLeft(Player) + giocatore.Vel);
             }
             if (goSx)
             {
-                Canvas.SetLeft(Player, Canvas.GetLeft(Player) - giocatore.getVel());
+                Canvas.SetLeft(Player, Canvas.GetLeft(Player) - giocatore.Vel);
             }
             if (!intercPalla1)
             {
@@ -75,7 +76,7 @@ namespace HeadSoccer
             switch (e.Key)
             {
                 case Key.Space:
-                    gravity = 8;
+                    jumping = true;
                     break;
                 case Key.D:
                     goDx = true;
@@ -91,7 +92,7 @@ namespace HeadSoccer
             switch (e.Key)
             {
                 case Key.Space:
-                    gravity = 8;
+                    jumping = false;
                     break;
                 case Key.D:
                     goDx = false;
@@ -107,8 +108,11 @@ namespace HeadSoccer
             gameTimer.Start();
             myCanvas.Focus();
             //gameOver = false;
-            Canvas.SetTop(Player, giocatore.getPosX());
-            Canvas.SetLeft(Player, giocatore.getPosY());
+            Canvas.SetTop(Player, giocatore.posX);
+            Canvas.SetLeft(Player, giocatore.posY);
+            palla = new Palla(460, 910, 3, new BitmapImage(new Uri(@"images/palla.png", UriKind.Relative)));
+            Canvas.SetTop(Palla, palla.pos_X);
+            Canvas.SetLeft(Palla, palla.pos_Y);
         }
 
         private void EndGame()
@@ -116,11 +120,6 @@ namespace HeadSoccer
             //gameOver = true;
         }
 
-        private int GeneraDirPallaRandom()
-        {
-            dirPalla = r.Next(2) + 1;
-            return dirPalla;
-        }
 
         private void Intersezioni()
         {
@@ -145,24 +144,24 @@ namespace HeadSoccer
                 case 0:
                     return;
                 case 1:
-                    giocatore = new Giocatore("Player1", new BitmapImage(new Uri(@"images/player1.png", UriKind.Relative)), 600, 200, 10, "Air snow storm shot");
-                    Player.Source = giocatore.getImmagine();
+                    giocatore = new Giocatore("Player1", new BitmapImage(new Uri(@"images/player1.png", UriKind.Relative)), 900, 200, 10, "Air snow storm shot");
+                    Player.Source = giocatore.Immagine;
                     break;
                 case 2:
-                    giocatore = new Giocatore("Player2", new BitmapImage(new Uri(@"images/player2.png", UriKind.Relative)), 600, 200, 10, "Blue area shot");
-                    Player.Source = giocatore.getImmagine();
+                    giocatore = new Giocatore("Player2", new BitmapImage(new Uri(@"images/player2.png", UriKind.Relative)), 900, 200, 10, "Blue area shot");
+                    Player.Source = giocatore.Immagine;
                     break;
                 case 3:
-                    giocatore = new Giocatore("Player3", new BitmapImage(new Uri(@"images/player3.png", UriKind.Relative)), 600, 200, 10, "Power shots");
-                    Player.Source = giocatore.getImmagine();
+                    giocatore = new Giocatore("Player3", new BitmapImage(new Uri(@"images/player3.png", UriKind.Relative)), 900, 200, 10, "Power shots");
+                    Player.Source = giocatore.Immagine;
                     break;
                 case 4:
-                    giocatore = new Giocatore("Player4", new BitmapImage(new Uri(@"images/player4.png", UriKind.Relative)), 600, 200, 10, "Sand shot");
-                    Player.Source = giocatore.getImmagine();
+                    giocatore = new Giocatore("Player4", new BitmapImage(new Uri(@"images/player4.png", UriKind.Relative)), 900, 200, 10, "Sand shot");
+                    Player.Source = giocatore.Immagine;
                     break;
                 case 5:
-                    giocatore = new Giocatore("Player5", new BitmapImage(new Uri(@"images/player5.png", UriKind.Relative)), 600, 200, 10, "Military shot");
-                    Player.Source = giocatore.getImmagine();
+                    giocatore = new Giocatore("Player5", new BitmapImage(new Uri(@"images/player5.png", UriKind.Relative)), 900, 200, 10, "Military shot");
+                    Player.Source = giocatore.Immagine;
                     break;
                 default:
                     break;

@@ -26,25 +26,5 @@ namespace HeadSoccer
             Vel = vel;
             mossaSpeciale = mossaspeciale;
         }
-
-        public BitmapImage getImmagine()
-        {
-            return Immagine;
-        }
-
-        public int getPosX()
-        {
-            return posX;
-        }
-
-        public int getPosY()
-        {
-            return posY;
-        }
-
-        public int getVel()
-        {
-            return Vel;
-        }
     }
 }
