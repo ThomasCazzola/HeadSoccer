@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="Giocatore.cs" />
     <Compile Include="Palla.cs" />
+    <Compile Include="Punteggio.cs" />
     <Compile Include="SelectPlayer.xaml.cs">
       <DependentUpon>SelectPlayer.xaml</DependentUpon>
     </Compile>
@@ -124,6 +125,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\backgroundselgiocatore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\portaDx.png" />
+    <Resource Include="images\portaSx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\lato.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

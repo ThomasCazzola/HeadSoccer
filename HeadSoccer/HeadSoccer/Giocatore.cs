@@ -16,7 +16,6 @@ namespace HeadSoccer
         public int Vel { get; set; }
         public string mossaSpeciale { get; set; }
 
-
         public Giocatore(string nome, BitmapImage immagine, int posX, int posY, int vel, string mossaspeciale)
         {
             Nome = nome;
@@ -26,5 +25,7 @@ namespace HeadSoccer
             Vel = vel;
             mossaSpeciale = mossaspeciale;
         }
+
+
     }
 }

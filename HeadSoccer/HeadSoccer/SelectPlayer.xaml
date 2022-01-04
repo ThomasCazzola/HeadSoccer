@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeadSoccer"
         mc:Ignorable="d"
-        Title="SelectPlayer" Height="442" Width="800">
+        Title="SelectPlayer" Height="442" Width="800"
+        WindowState="Maximized">
     <Window.Background>
         <ImageBrush ImageSource="images/backgroundselgiocatore.png"></ImageBrush>
     </Window.Background>
