@@ -56,12 +56,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComunicazionePlayer.cs" />
+    <Compile Include="Comunicazione.xaml.cs">
+      <DependentUpon>Comunicazione.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Giocatore.cs" />
     <Compile Include="Palla.cs" />
     <Compile Include="Punteggio.cs" />
     <Compile Include="SelectPlayer.xaml.cs">
       <DependentUpon>SelectPlayer.xaml</DependentUpon>
     </Compile>
+    <Page Include="Comunicazione.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
