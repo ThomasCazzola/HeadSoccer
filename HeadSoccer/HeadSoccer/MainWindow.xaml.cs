@@ -16,9 +16,9 @@ namespace HeadSoccer
         DispatcherTimer gameTimer = new DispatcherTimer(DispatcherPriority.Normal);
         DispatcherTimer tempoRimanente = new DispatcherTimer(DispatcherPriority.Normal);
         //bool gameOver = false;
-        bool goDx, goSx;
-        int gravity = 8;
-        Rect playerHitBox, ballHitBox, groundSxHitBox, groundDxHitBox, portaSxHitbox, portaDxHitbox, topSxHitBox, topDxHitBox, latoSxAltoHitBox, latoSxBassoHitBox, latoDxAltoHitbox, latoDxBassoHitBox; //groundTopHitBox;
+        bool goDx, goSx, jumping;
+        int jumpSpeed = 20;
+        Rect playerHitBox, ballHitBox, groundSxHitBox, groundDxHitBox, portaSxHitbox, portaDxHitbox, topSxHitBox, topDxHitBox, latoSxAltoHitBox, latoSxBassoHitBox, latoDxAltoHitbox, latoDxBassoHitBox;
         Random r = new Random();
         Giocatore giocatore = null;
         Palla palla = null;
@@ -42,7 +42,7 @@ namespace HeadSoccer
             topSxHitBox = new Rect(Canvas.GetLeft(TopSx), Canvas.GetTop(TopSx), TopSx.ActualWidth, TopSx.ActualHeight);
             topDxHitBox = new Rect(Canvas.GetLeft(TopDx), Canvas.GetTop(TopDx), TopDx.ActualWidth, TopDx.ActualHeight);
             portaSxHitbox = new Rect(Canvas.GetLeft(portaSx), Canvas.GetTop(portaSx), portaSx.ActualWidth, portaSx.ActualHeight);
-            portaDxHitbox = new Rect(Canvas.GetLeft(portaDx) + 50, Canvas.GetTop(portaDx), portaDx.ActualWidth, portaDx.ActualHeight);
+            portaDxHitbox = new Rect(Canvas.GetLeft(portaDx), Canvas.GetTop(portaDx), portaDx.ActualWidth, portaDx.ActualHeight);
             latoSxAltoHitBox = new Rect(Canvas.GetLeft(latoSxAlto), Canvas.GetTop(latoSxAlto), latoSxAlto.ActualWidth, latoSxAlto.ActualHeight);
             latoSxBassoHitBox = new Rect(Canvas.GetLeft(latoSxBasso), Canvas.GetTop(latoSxBasso), latoSxBasso.ActualWidth, latoSxBasso.ActualHeight);
             latoDxAltoHitbox = new Rect(Canvas.GetLeft(latoDxAlto), Canvas.GetTop(latoDxAlto), latoDxAlto.ActualWidth, latoDxAlto.ActualHeight);
@@ -73,22 +73,29 @@ namespace HeadSoccer
             latoSxBassoHitBox.X = Canvas.GetLeft(latoSxBasso); latoSxBassoHitBox.Y = Canvas.GetTop(latoSxBasso); latoSxBassoHitBox.Width = latoSxBasso.ActualWidth; latoSxBassoHitBox.Height = latoSxBasso.ActualHeight;
             latoDxAltoHitbox.X = Canvas.GetLeft(latoDxAlto); latoDxAltoHitbox.Y = Canvas.GetTop(latoDxAlto); latoDxAltoHitbox.Width = latoDxAlto.ActualWidth; latoDxAltoHitbox.Height = latoDxAlto.ActualHeight;
             latoDxBassoHitBox.X = Canvas.GetLeft(latoDxBasso); latoDxBassoHitBox.Y = Canvas.GetTop(latoDxBasso); latoDxBassoHitBox.Width = latoDxBasso.ActualWidth; latoDxBassoHitBox.Height = latoDxBasso.ActualHeight;
-
-            Canvas.SetTop(Player, Canvas.GetTop(Player) + gravity);
-            if (goDx)
+            Canvas.SetTop(Player, giocatore.posY + jumpSpeed);
+            if (goDx && Canvas.GetLeft(Player) < 1800)
             {
                 Canvas.SetLeft(Player, Canvas.GetLeft(Player) + giocatore.Vel);
             }
-            if (goSx)
+            if (goSx && Canvas.GetLeft(Player) > 0)
             {
                 Canvas.SetLeft(Player, Canvas.GetLeft(Player) - giocatore.Vel);
             }
+            if (jumping)
+            {
+                Canvas.SetTop(Player, Canvas.GetTop(Player) - jumpSpeed);
+            }
+            else
+            {
+                Canvas.SetTop(Player, Canvas.GetTop(Player) + jumpSpeed);
+            }
             palla.SetDirezione();
-            Canvas.SetTop(Palla, palla.pos_X);
-            Canvas.SetLeft(Palla, palla.pos_Y);
-            Intersezioni();
-            labelSquadra1.Content = "SQUADRA 1: " + punteggio.punteggioSquadra1;
-            labelSquadra2.Content = "SQUADRA 2: " + punteggio.punteggioSquadra2;
+            Canvas.SetTop(Palla, palla.pos_Y);
+            Canvas.SetLeft(Palla, palla.pos_X);
+            CollisioniPalla();
+            labelSquadra1.Content = "SQUADRA 1: " + punteggio.punteggioSquadra1 / 2;
+            labelSquadra2.Content = "SQUADRA 2: " + punteggio.punteggioSquadra2 / 2;
             labelTimer.Content = "00:00";
         }
 
@@ -97,7 +104,8 @@ namespace HeadSoccer
             switch (e.Key)
             {
                 case Key.Space:
-                    gravity = 8;
+                    if (!jumping)
+                        jumping = true;
                     break;
                 case Key.D:
                     goDx = true;
@@ -113,7 +121,8 @@ namespace HeadSoccer
             switch (e.Key)
             {
                 case Key.Space:
-                    gravity = -8;
+                    if (jumping)
+                        jumping = false;
                     break;
                 case Key.D:
                     goDx = false;
@@ -122,6 +131,7 @@ namespace HeadSoccer
                     goSx = false;
                     break;
             }
+
         }
 
         private void StartGame()
@@ -130,11 +140,11 @@ namespace HeadSoccer
             stopwatch.Start();
             tempoRimanente.Start();
             myCanvas.Focus();
-            Canvas.SetTop(Player, giocatore.posX);
-            Canvas.SetLeft(Player, giocatore.posY);
-            palla = new Palla(460, 910, 4, new BitmapImage(new Uri(@"images/palla.png", UriKind.Relative)));
-            Canvas.SetTop(Palla, palla.pos_X);
-            Canvas.SetLeft(Palla, palla.pos_Y);
+            Canvas.SetTop(Player, giocatore.posY);
+            Canvas.SetLeft(Player, giocatore.posX);
+            palla = new Palla(910, 460, 6, new BitmapImage(new Uri(@"images/palla.png", UriKind.Relative)));
+            Canvas.SetTop(Palla, palla.pos_Y);
+            Canvas.SetLeft(Palla, palla.pos_X);
             palla.GeneraDirPallaRandom();
             punteggio = new Punteggio(0, 0);
         }
@@ -144,53 +154,56 @@ namespace HeadSoccer
             //gameOver = true;
         }
 
-        private void Intersezioni()
+        private void CollisioniPalla()
         {
-            if (playerHitBox.IntersectsWith(groundSxHitBox))
-            {
-                Canvas.SetTop(Player, Canvas.GetTop(GroundSx) - Player.ActualHeight);
-            }
             if (ballHitBox.IntersectsWith(playerHitBox))
             {
-                palla.dirX = 1;
                 palla.dirY = -1;
+                palla.dirX = 1;
             }
             if (ballHitBox.IntersectsWith(portaSxHitbox))
             {
                 punteggio.punteggioSquadra2++;
-                palla.pos_X = 460;
-                palla.pos_Y = 910;
+                palla.pos_X = 910;
+                palla.pos_Y = 460;
             }
             if (ballHitBox.IntersectsWith(portaDxHitbox))
             {
                 punteggio.punteggioSquadra1++;
-                palla.pos_X = 460;
-                palla.pos_Y = 910;
-            }
-            if (ballHitBox.IntersectsWith(playerHitBox))
-            {
-                palla.dirX = 1;
-                palla.dirY = -1;
+                palla.pos_X = 910;
+                palla.pos_Y = 460;
             }
             if (ballHitBox.IntersectsWith(topSxHitBox))
             {
-                palla.dirX = -1;
                 palla.dirY = 1;
             }
             if (ballHitBox.IntersectsWith(topDxHitBox))
             {
-                palla.dirX = -1;
-                palla.dirY = -1;
+                palla.dirY = 1;
             }
             if (ballHitBox.IntersectsWith(groundSxHitBox))
             {
-                palla.dirX = 1;
-                palla.dirY = 1;
+                palla.dirY = -1;
             }
             if (ballHitBox.IntersectsWith(groundDxHitBox))
             {
-                palla.dirX = 1;
                 palla.dirY = -1;
+            }
+            if (ballHitBox.IntersectsWith(latoDxAltoHitbox))
+            {
+                palla.dirX = -1;
+            }
+            if (ballHitBox.IntersectsWith(latoDxBassoHitBox))
+            {
+                palla.dirX = -1;
+            }
+            if (ballHitBox.IntersectsWith(latoSxAltoHitBox))
+            {
+                palla.dirX = 1;
+            }
+            if (ballHitBox.IntersectsWith(latoSxBassoHitBox))
+            {
+                palla.dirX = 1;
             }
         }
 
@@ -201,28 +214,24 @@ namespace HeadSoccer
                 case 0:
                     return;
                 case 1:
-                    giocatore = new Giocatore("Player1", new BitmapImage(new Uri(@"images/player1.png", UriKind.Relative)), 900, 200, 10, "Air snow storm shot");
-                    Player.Source = giocatore.Immagine;
+                    giocatore = new Giocatore("Player1", new BitmapImage(new Uri(@"images/player1.png", UriKind.Relative)), 200, 750, 10, "Air snow storm shot");
                     break;
                 case 2:
-                    giocatore = new Giocatore("Player2", new BitmapImage(new Uri(@"images/player2.png", UriKind.Relative)), 900, 200, 10, "Blue area shot");
-                    Player.Source = giocatore.Immagine;
+                    giocatore = new Giocatore("Player2", new BitmapImage(new Uri(@"images/player2.png", UriKind.Relative)), 200, 750, 10, "Blue area shot");
                     break;
                 case 3:
-                    giocatore = new Giocatore("Player3", new BitmapImage(new Uri(@"images/player3.png", UriKind.Relative)), 900, 200, 10, "Power shots");
-                    Player.Source = giocatore.Immagine;
+                    giocatore = new Giocatore("Player3", new BitmapImage(new Uri(@"images/player3.png", UriKind.Relative)), 200, 750, 10, "Power shots");
                     break;
                 case 4:
-                    giocatore = new Giocatore("Player4", new BitmapImage(new Uri(@"images/player4.png", UriKind.Relative)), 900, 200, 10, "Sand shot");
-                    Player.Source = giocatore.Immagine;
+                    giocatore = new Giocatore("Player4", new BitmapImage(new Uri(@"images/player4.png", UriKind.Relative)), 200, 750, 10, "Sand shot");
                     break;
                 case 5:
-                    giocatore = new Giocatore("Player5", new BitmapImage(new Uri(@"images/player5.png", UriKind.Relative)), 900, 200, 10, "Military shot");
-                    Player.Source = giocatore.Immagine;
+                    giocatore = new Giocatore("Player5", new BitmapImage(new Uri(@"images/player5.png", UriKind.Relative)), 200, 750, 10, "Military shot");
                     break;
                 default:
                     break;
             }
+            Player.Source = giocatore.Immagine;
         }
     }
 }

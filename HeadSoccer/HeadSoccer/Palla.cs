@@ -50,19 +50,19 @@ namespace HeadSoccer
         {
             if (dirX == -1)
             {
-                pos_X += vel;
+                pos_X -= vel;
             }
             if (dirX == 1)
             {
-                pos_X -= vel;
+                pos_X += vel;
             }
             if (dirY == -1)
             {
-                pos_Y += vel;
+                pos_Y -= vel;
             }
             if (dirY == 1)
             {
-                pos_Y -= vel;
+                pos_Y += vel;
             }
         }
 

@@ -14,9 +14,9 @@
     <Canvas x:Name="myCanvas" HorizontalAlignment="Left" Height="451" Margin="1,-1,0,0" VerticalAlignment="Top" Width="800">
         <Image x:Name="Player" Height="100" Canvas.Left="600" Canvas.Top="200" Width="100" Tag="player" Source="images/player1.png"/>
         <Image x:Name="Palla" Height="100" Canvas.Left="910" Canvas.Top="460" Width="100" Tag="palla" Source="images/palla.png"/>
-        <Image x:Name="GroundSx" Height="100" Canvas.Top="942" Canvas.Left="0" Width="960" Source="images/ground.png"/>
+        <Image x:Name="GroundSx" Height="100" Canvas.Top="975" Canvas.Left="0" Width="960" Source="images/ground.png"/>
         <Image x:Name="TopSx" Height="100" Canvas.Top="-55" Canvas.Left="0" Width="960" Source="images/ground.png"/>
-        <Image x:Name="GroundDx" Height="100" Canvas.Top="942" Canvas.Left="910" Width="960" Source="images/ground.png"/>
+        <Image x:Name="GroundDx" Height="100" Canvas.Top="975" Canvas.Left="910" Width="960" Source="images/ground.png"/>
         <Image x:Name="TopDx" Height="100" Canvas.Top="-55" Canvas.Left="910" Width="960" Source="images/ground.png"/>
         <Image x:Name="portaDx" Height="246" Canvas.Top="384" Canvas.Left="1709" Width="301" Source="images/portaDx.png"/>
         <Image x:Name="portaSx" Height="250" Canvas.Top="380" Canvas.Left="-80" Width="301" Source="images/portaSx.png"/>
