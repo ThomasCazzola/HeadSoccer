@@ -16,7 +16,7 @@ namespace HeadSoccer
         DispatcherTimer gameTimer = new DispatcherTimer(DispatcherPriority.Normal);
         DispatcherTimer tempoRimanente = new DispatcherTimer(DispatcherPriority.Normal);
         //bool gameOver = false;
-        bool goDx, goSx, jumping;
+        bool goDx, goSx, jumping, superPlayer1, superPlayer2, super, playerHitBall;
         int jumpSpeed = 20;
         Rect playerHitBox, ballHitBox, groundSxHitBox, groundDxHitBox, portaSxHitbox, portaDxHitbox, topSxHitBox, topDxHitBox, latoSxAltoHitBox, latoSxBassoHitBox, latoDxAltoHitbox, latoDxBassoHitBox;
         Random r = new Random();
@@ -56,6 +56,8 @@ namespace HeadSoccer
                 TimeSpan ts = stopwatch.Elapsed;
                 currentTime = String.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
                 labelTimer.Content = currentTime;
+                Slider1.Value += 0.1;
+                Slider2.Value += 0.1;
             }
         }
 
@@ -97,6 +99,16 @@ namespace HeadSoccer
             labelSquadra1.Content = "SQUADRA 1: " + punteggio.punteggioSquadra1 / 2;
             labelSquadra2.Content = "SQUADRA 2: " + punteggio.punteggioSquadra2 / 2;
             labelTimer.Content = "00:00";
+            ControlloSlider();
+            if(superPlayer1 && super && giocatore.mossaSpeciale.Equals("Air snow storm shot"))
+            {
+                if(playerHitBall)
+                {
+                    palla.vel = 20;
+                    Slider1.Value = Slider1.Minimum;
+                    superPlayer1 = false;
+                }   
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -112,6 +124,9 @@ namespace HeadSoccer
                     break;
                 case Key.A:
                     goSx = true;
+                    break;
+                case Key.L:
+                    super = true;
                     break;
             }
         }
@@ -129,6 +144,9 @@ namespace HeadSoccer
                     break;
                 case Key.A:
                     goSx = false;
+                    break;
+                case Key.L:
+                    super = false;
                     break;
             }
 
@@ -154,12 +172,29 @@ namespace HeadSoccer
             //gameOver = true;
         }
 
+        private void ControlloSlider()
+        {
+            if(Slider1.Value == Slider1.Maximum)
+            {
+                superPlayer1 = true;
+            }
+            if(Slider2.Value == Slider2.Maximum)
+            {
+                superPlayer2 = true;
+            }
+        }
+
         private void CollisioniPalla()
         {
             if (ballHitBox.IntersectsWith(playerHitBox))
             {
                 palla.dirY = -1;
                 palla.dirX = 1;
+                playerHitBall = true;
+            }
+            else
+            {
+                playerHitBall = false;
             }
             if (ballHitBox.IntersectsWith(portaSxHitbox))
             {

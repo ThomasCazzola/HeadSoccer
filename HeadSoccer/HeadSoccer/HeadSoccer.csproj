@@ -56,10 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ComunicazionePlayer.cs" />
     <Compile Include="Comunicazione.xaml.cs">
       <DependentUpon>Comunicazione.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ComunicazionePlayer.cs" />
     <Compile Include="Giocatore.cs" />
     <Compile Include="Palla.cs" />
     <Compile Include="Punteggio.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,18 +20,18 @@ namespace HeadSoccer
     /// </summary>
     public partial class Comunicazione : Window
     {
-        ComunicazionePlayer comPlayer = null;
-        string ipDest = string.Empty;
+        ComunicazionePlayer cm = new ComunicazionePlayer();
         public Comunicazione()
         {
             InitializeComponent();
-            ipDest = txtIp.Text;
+            cm.ipDest = txtIp.Text;
+            Thread t = new Thread(new ThreadStart(cm.ThreadReceive));
+            t.Start();
         }
 
         private void btnInvia_Click(object sender, RoutedEventArgs e)
         {
-           comPlayer = new ComunicazionePlayer();
-           comPlayer.Send("c;" + txtNome.Text, ipDest);
+            cm.SendPacketWithData("c;", txtNome.Text);
         }
     }
 }

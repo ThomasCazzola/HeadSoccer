@@ -18,14 +18,16 @@
         <Image x:Name="TopSx" Height="100" Canvas.Top="-55" Canvas.Left="0" Width="960" Source="images/ground.png"/>
         <Image x:Name="GroundDx" Height="100" Canvas.Top="975" Canvas.Left="910" Width="960" Source="images/ground.png"/>
         <Image x:Name="TopDx" Height="100" Canvas.Top="-55" Canvas.Left="910" Width="960" Source="images/ground.png"/>
-        <Image x:Name="portaDx" Height="246" Canvas.Top="384" Canvas.Left="1709" Width="301" Source="images/portaDx.png"/>
+        <Image x:Name="portaDx" Height="246" Canvas.Top="382" Canvas.Left="1841" Width="63" Source="images/portaDx.png"/>
         <Image x:Name="portaSx" Height="250" Canvas.Top="380" Canvas.Left="-80" Width="301" Source="images/portaSx.png"/>
         <Image x:Name="latoSxAlto" Height="370" Canvas.Top="10" Canvas.Left="-95" Width="301" Source="images/lato.png"/>
         <Image x:Name="latoSxBasso" Height="338" Canvas.Top="635" Canvas.Left="-97" Width="301" Source="images/lato.png"/>
-        <Image x:Name="latoDxBasso" Height="338" Canvas.Top="635" Canvas.Left="1717" Width="301" Source="images/lato.png"/>
-        <Image x:Name="latoDxAlto" Height="370" Canvas.Top="14" Canvas.Left="1715" Width="301" Source="images/lato.png"/>
+        <Image x:Name="latoDxBasso" Height="338" Canvas.Top="635" Canvas.Left="1844" Width="48" Source="images/lato.png"/>
+        <Image x:Name="latoDxAlto" Height="370" Canvas.Top="14" Canvas.Left="1841" Width="50" Source="images/lato.png"/>
         <Label x:Name="labelSquadra1" Canvas.Left="700" Canvas.Top="12" FontSize="30"/>
         <Label x:Name="labelSquadra2" Canvas.Left="1022" Canvas.Top="12" FontSize="30"/>
         <Label x:Name="labelTimer" Canvas.Left="920" Canvas.Top="12" FontSize="30"/>
+        <Slider x:Name="Slider1" Canvas.Left="600" Canvas.Top="16" Maximum="100" Width="100"></Slider>
+        <Slider x:Name="Slider2" Canvas.Left="1322" Canvas.Top="16" Maximum="100" Width="100"></Slider>
     </Canvas>
 </Window>
