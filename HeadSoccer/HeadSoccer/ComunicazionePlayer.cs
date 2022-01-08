@@ -2,7 +2,9 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace HeadSoccer
 {
@@ -10,15 +12,24 @@ namespace HeadSoccer
     {
         string datiRicevuti = string.Empty;
         string nomeAvversario = string.Empty;
+        SelectPlayer sp = new SelectPlayer();
+        Thread ricezione;
+        Comunicazione com;
         public string mioNome { get; set; }
         public string ipDest { get; set; }
+
+        public ComunicazionePlayer(Comunicazione c)
+        {
+            com = c;
+        }
+
         public void SendPacketWithData(string azione, string dataIn)
         {
             UdpClient client = new UdpClient();
             string str = string.Empty;
-            if (azione != null)
+            if (azione != string.Empty)
             {
-                str = azione + ";" + dataIn;
+                str = azione + dataIn;
                 byte[] data = Encoding.ASCII.GetBytes(str);
                 client.Send(data, data.Length, ipDest, 12345);
             }
@@ -36,14 +47,13 @@ namespace HeadSoccer
             {
                 UdpClient receive = new UdpClient(12346);
                 IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
-                // while fino alla fine del punteggio o del tempo
                 byte[] bytes = receive.Receive(ref riceveEP);
                 datiRicevuti = Encoding.ASCII.GetString(bytes);
                 controlloMessaggi();
             }
             catch (Exception e)
             {
-                //errore
+                e.Message.ToString();
                 MessageBox.Show("Errore di ricezione", "Errore di ricezione", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
@@ -52,13 +62,22 @@ namespace HeadSoccer
         {
             string[] vs = datiRicevuti.Split(';');
             nomeAvversario = vs[1];
-            if (!vs[0].Equals(" "))
+
+            MessageBox.Show(nomeAvversario);
+            if (!vs[0].Equals(""))
             {
                 if (vs[0].Equals("c"))
                 {
                     if (MessageBox.Show(nomeAvversario + " ti ha inviato una richiesta di gioco", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        SendPacketWithData("y;", mioNome);
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            InputDialog inputDialog = new InputDialog("Inserisci il tuo nome:", "");
+                            if (inputDialog.ShowDialog() == true)
+                            {
+                                SendPacketWithData("y;", inputDialog.Answer);
+                            }
+                        }));
                     }
                     else
                     {
@@ -66,7 +85,7 @@ namespace HeadSoccer
                         SendPacketWithoutData("n;");
                     }
                 }
-                else if (vs[0].Equals("y") && !vs[1].Equals(" "))
+                else if (vs[0].Equals("y") && !vs[1].Equals(""))
                 {
                     if (MessageBox.Show("Vuoi connetterti davvero con: " + nomeAvversario + "?", "Conferma connessione", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
@@ -74,10 +93,11 @@ namespace HeadSoccer
                         MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            SelectPlayer sp = new SelectPlayer();
                             sp.Show();
+                            com.Close();
                         }));
-                    }else
+                    }
+                    else
                     {
                         SendPacketWithoutData("n;");
                     }
@@ -87,14 +107,44 @@ namespace HeadSoccer
                     MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectPlayer sp = new SelectPlayer();
                         sp.Show();
+                        com.Close();
                     }));
-                }else if (vs[0].Equals("n"))
+                }
+                // movimento giocatore
+                else if (vs[0].Equals("a"))
                 {
-                    MessageBox.Show("Connessione con: " + nomeAvversario + " bloccata.", "Connessione rifiutata", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                }
+                else if (vs[0].Equals("d"))
+                {
+
+                }
+                else if (vs[0].Equals("space"))
+                {
+
+                }
+                else if (vs[0].Equals("l"))
+                {
+
+                }
+                //movimento palla
+                else if (vs[0].Equals("p"))
+                {
+
+                }
+                // fase chiusura
+                else if (vs[0].Equals("e"))
+                {
+
                 }
             }
+        }
+
+        public void StartThreadRicezione()
+        {
+            ricezione = new Thread(new ThreadStart(ThreadReceive));
+            ricezione.Start();
         }
     }
 }

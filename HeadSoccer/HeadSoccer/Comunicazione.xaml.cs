@@ -20,13 +20,13 @@ namespace HeadSoccer
     /// </summary>
     public partial class Comunicazione : Window
     {
-        ComunicazionePlayer cm = new ComunicazionePlayer();
+        ComunicazionePlayer cm;
         public Comunicazione()
         {
             InitializeComponent();
+            cm = new ComunicazionePlayer(this);
             cm.ipDest = txtIp.Text;
-            Thread t = new Thread(new ThreadStart(cm.ThreadReceive));
-            t.Start();
+            cm.StartThreadRicezione();
         }
 
         private void btnInvia_Click(object sender, RoutedEventArgs e)

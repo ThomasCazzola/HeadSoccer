@@ -61,12 +61,19 @@
     </Compile>
     <Compile Include="ComunicazionePlayer.cs" />
     <Compile Include="Giocatore.cs" />
+    <Compile Include="InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Palla.cs" />
     <Compile Include="Punteggio.cs" />
     <Compile Include="SelectPlayer.xaml.cs">
       <DependentUpon>SelectPlayer.xaml</DependentUpon>
     </Compile>
     <Page Include="Comunicazione.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
