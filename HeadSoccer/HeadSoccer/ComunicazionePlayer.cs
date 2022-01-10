@@ -15,17 +15,22 @@ namespace HeadSoccer
         SelectPlayer sp = new SelectPlayer();
         Thread ricezione;
         Comunicazione com;
+        UdpClient receive;
+        IPEndPoint riceveEP;
+        UdpClient client;
         public string mioNome { get; set; }
         public string ipDest { get; set; }
 
         public ComunicazionePlayer(Comunicazione c)
         {
             com = c;
+            client = new UdpClient();
+            riceveEP = new IPEndPoint(IPAddress.Any, 0);
+            receive = new UdpClient(12346);
         }
 
         public void SendPacketWithData(string azione, string dataIn)
         {
-            UdpClient client = new UdpClient();
             string str = string.Empty;
             if (azione != string.Empty)
             {
@@ -36,7 +41,6 @@ namespace HeadSoccer
         }
         private void SendPacketWithoutData(string str)
         {
-            UdpClient client = new UdpClient();
             byte[] data = Encoding.ASCII.GetBytes(str);
             client.Send(data, data.Length, ipDest, 12345);
         }
@@ -45,11 +49,12 @@ namespace HeadSoccer
         {
             try
             {
-                UdpClient receive = new UdpClient(12346);
-                IPEndPoint riceveEP = new IPEndPoint(IPAddress.Any, 0);
-                byte[] bytes = receive.Receive(ref riceveEP);
-                datiRicevuti = Encoding.ASCII.GetString(bytes);
-                controlloMessaggi();
+                while (true)
+                {
+                    byte[] bytes = receive.Receive(ref riceveEP);
+                    datiRicevuti = Encoding.ASCII.GetString(bytes);
+                    controlloMessaggi(riceveEP.Address.ToString());
+                }
             }
             catch (Exception e)
             {
@@ -58,18 +63,18 @@ namespace HeadSoccer
             }
         }
 
-        public void controlloMessaggi()
+        public void controlloMessaggi(string ipAddress)
         {
             string[] vs = datiRicevuti.Split(';');
             nomeAvversario = vs[1];
-
-            MessageBox.Show(nomeAvversario);
+            MessageBox.Show(datiRicevuti);
             if (!vs[0].Equals(""))
             {
                 if (vs[0].Equals("c"))
                 {
                     if (MessageBox.Show(nomeAvversario + " ti ha inviato una richiesta di gioco", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
+                        ipDest = ipAddress;
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             InputDialog inputDialog = new InputDialog("Inserisci il tuo nome:", "");
@@ -90,7 +95,7 @@ namespace HeadSoccer
                     if (MessageBox.Show("Vuoi connetterti davvero con: " + nomeAvversario + "?", "Conferma connessione", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
                         SendPacketWithoutData("y;");
-                        MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata, verrai reindirizzato alla selezione del personaggio.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             sp.Show();
@@ -104,12 +109,17 @@ namespace HeadSoccer
                 }
                 else if (vs[0].Equals("y"))
                 {
-                    MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata, verrai reindirizzato alla selezione del personaggio.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         sp.Show();
                         com.Close();
                     }));
+                }
+                // selezione giocatore
+                else if (vs[0].Equals("s"))
+                {
+
                 }
                 // movimento giocatore
                 else if (vs[0].Equals("a"))

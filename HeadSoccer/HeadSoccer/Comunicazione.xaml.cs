@@ -25,12 +25,12 @@ namespace HeadSoccer
         {
             InitializeComponent();
             cm = new ComunicazionePlayer(this);
-            cm.ipDest = txtIp.Text;
             cm.StartThreadRicezione();
         }
 
         private void btnInvia_Click(object sender, RoutedEventArgs e)
         {
+            cm.ipDest = txtIp.Text;
             cm.SendPacketWithData("c;", txtNome.Text);
         }
     }

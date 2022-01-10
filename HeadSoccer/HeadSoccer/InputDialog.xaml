@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HeadSoccer"
         mc:Ignorable="d"
         Title="InputDialog" Height="450" Width="800">
-    <Grid Margin="15,15,15,332">
+    <Grid Margin="15,15,15,229">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
