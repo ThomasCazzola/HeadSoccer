@@ -66,5 +66,14 @@ namespace HeadSoccer
             }
         }
 
+        public int GetX()
+        {
+            return pos_X;
+        }
+        public int GetY()
+        {
+            return pos_Y;
+        }
+
     }
 }
