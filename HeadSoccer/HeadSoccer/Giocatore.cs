@@ -16,6 +16,16 @@ namespace HeadSoccer
         public int Vel { get; set; }
         public string mossaSpeciale { get; set; }
 
+        public Giocatore()
+        {
+            Nome = "";
+            Immagine = null;
+            this.posX = 0;
+            this.posY = 0;
+            Vel = 0;
+            mossaSpeciale = "";
+        }
+
         public Giocatore(string nome, BitmapImage immagine, int posX, int posY, int vel, string mossaspeciale)
         {
             Nome = nome;
