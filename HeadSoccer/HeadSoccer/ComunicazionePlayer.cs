@@ -10,6 +10,7 @@ namespace HeadSoccer
 {
     class ComunicazionePlayer
     {
+        Giocatore playerEnemy = new Giocatore();
         string datiRicevuti = string.Empty;
         string nomeAvversario = string.Empty;
         SelectPlayer sp = new SelectPlayer();
@@ -67,6 +68,8 @@ namespace HeadSoccer
         {
             string[] vs = datiRicevuti.Split(';');
             nomeAvversario = vs[1];
+            //Setto il nome dell'avversario
+            playerEnemy.Nome = nomeAvversario;
             MessageBox.Show(datiRicevuti);
             if (!vs[0].Equals(""))
             {
@@ -119,29 +122,43 @@ namespace HeadSoccer
                 // selezione giocatore
                 else if (vs[0].Equals("s"))
                 {
-
+                    
                 }
                 // movimento giocatore
                 else if (vs[0].Equals("a"))
                 {
-
+                    //Va a sinistra
+                    playerEnemy.posX--;
                 }
                 else if (vs[0].Equals("d"))
                 {
-
+                    //Va a destra
+                    playerEnemy.posX++;
                 }
                 else if (vs[0].Equals("space"))
                 {
-
+                    //Salto
+                    //Ho fatto dei while in modo tale da rendere più fluido il movimento altrimenti sarebbe uno scatto su e giu.
+                    int i = 0;
+                    for (i = 0; i < 10; i++)
+                    {
+                        playerEnemy.posY++;
+                        Thread.Sleep(10);
+                    }
+                    for (int k=i; k > -1; k--)
+                    {
+                        playerEnemy.posY--;
+                        Thread.Sleep(10);
+                    }
                 }
                 else if (vs[0].Equals("l"))
                 {
-
+                    //Super mossa
                 }
                 //movimento palla
                 else if (vs[0].Equals("p"))
                 {
-
+                    //Direzione palla
                 }
                 // fase chiusura
                 else if (vs[0].Equals("e"))
