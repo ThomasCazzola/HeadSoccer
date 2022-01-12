@@ -32,6 +32,7 @@ namespace HeadSoccer
         {
             cm.ipDest = txtIp.Text;
             cm.SendPacketWithData("c;", txtNome.Text);
+            this.Close();
         }
     }
 }

@@ -148,5 +148,23 @@
   <ItemGroup>
     <Resource Include="images\lato.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Prta_di_sinistra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Porta_di_destra.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="backgroundselgiocatore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GroundSx.bmp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="GroundDx.bmp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
