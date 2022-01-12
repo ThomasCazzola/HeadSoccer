@@ -25,6 +25,7 @@ namespace HeadSoccer
         Punteggio punteggio = null;
         string currentTime = string.Empty;
         Stopwatch stopwatch = new Stopwatch();
+        Condivisa cond = Condivisa.getInstance();
 
         public MainWindow(int index)
         {
@@ -160,6 +161,8 @@ namespace HeadSoccer
             myCanvas.Focus();
             Canvas.SetTop(Player, giocatore.posY);
             Canvas.SetLeft(Player, giocatore.posX);
+            Canvas.SetTop(Player2, cond.avversario.posY);
+            Canvas.SetLeft(Player2, cond.avversario.posX);
             palla = new Palla(910, 460, 6, new BitmapImage(new Uri(@"images/palla.png", UriKind.Relative)));
             Canvas.SetTop(Palla, palla.pos_Y);
             Canvas.SetLeft(Palla, palla.pos_X);

@@ -30,8 +30,8 @@ namespace HeadSoccer
 
         private void btnInvia_Click(object sender, RoutedEventArgs e)
         {
-            cm.ipDest = txtIp.Text;
-            cm.SendPacketWithData("c;", txtNome.Text);
+            SendPacket.ipDest = txtIp.Text;
+            SendPacket.SendPacketWithData("c;", txtNome.Text);
         }
     }
 }

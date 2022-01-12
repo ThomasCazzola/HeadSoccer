@@ -21,6 +21,7 @@ namespace HeadSoccer
     {
 
         int i = 1;
+        string nomePlayerSelezionato { get; set; }
         public SelectPlayer()
         {
             InitializeComponent();
@@ -53,8 +54,30 @@ namespace HeadSoccer
         private void Confirm(object sender, RoutedEventArgs e)
         {
             MainWindow m = new MainWindow(i);
+            switch (i)
+            {
+                case 1:
+                    nomePlayerSelezionato = "player1";
+                    break;
+                case 2:
+                    nomePlayerSelezionato = "player2";
+                    break;
+                case 3:
+                    nomePlayerSelezionato = "player3";
+                    break;
+                case 4:
+                    nomePlayerSelezionato = "player4";
+                    break;
+                case 5:
+                    nomePlayerSelezionato = "player5";
+                    break;
+                default:
+                    break;
+            }
+            SendPacket.SendPacketWithData("s;", nomePlayerSelezionato);
             m.Show();
             Close();
         }
+
     }
 }

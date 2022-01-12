@@ -29,5 +29,6 @@
         <Label x:Name="labelTimer" Canvas.Left="920" Canvas.Top="12" FontSize="30"/>
         <Slider x:Name="Slider1" Canvas.Left="600" Canvas.Top="16" Maximum="100" Width="100"></Slider>
         <Slider x:Name="Slider2" Canvas.Left="1322" Canvas.Top="16" Maximum="100" Width="100"></Slider>
+        <Image x:Name="Player2" Height="100" Canvas.Left="1466" Canvas.Top="200" Width="100" Tag="player" Source="/images/player1.png"/>
     </Canvas>
 </Window>

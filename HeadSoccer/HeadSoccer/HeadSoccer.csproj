@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>HeadSoccer</RootNamespace>
     <AssemblyName>HeadSoccer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -60,6 +60,7 @@
       <DependentUpon>Comunicazione.xaml</DependentUpon>
     </Compile>
     <Compile Include="ComunicazionePlayer.cs" />
+    <Compile Include="Condivisa.cs" />
     <Compile Include="Giocatore.cs" />
     <Compile Include="InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
@@ -69,6 +70,7 @@
     <Compile Include="SelectPlayer.xaml.cs">
       <DependentUpon>SelectPlayer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SendPacket.cs" />
     <Page Include="Comunicazione.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
