@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeadSoccer"
         mc:Ignorable="d"
-        Title="Comunicazione" Height="156" Width="453">
+        Title="Comunicazione" Height="219" Width="473" Background="#FF55B35B">
     <Grid>
         <Label x:Name="lblNome" Content="INSERISCI IL TUO NOME:" HorizontalAlignment="Left" Margin="22,22,0,0" VerticalAlignment="Top" Width="165" FontWeight="Bold"/>
         <TextBox x:Name="txtNome" HorizontalAlignment="Left" Margin="223,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
         <Label x:Name="lblIp" Content="INSERISCI L'IP DEL DESTINATARIO:" HorizontalAlignment="Left" Margin="22,57,0,0" VerticalAlignment="Top" Width="208" FontSize="12" FontWeight="Bold"/>
         <TextBox x:Name="txtIp" HorizontalAlignment="Left" Margin="250,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177"/>
         <Button x:Name="btnInvia" Content="INVIA RICHIESTA" HorizontalAlignment="Left" Margin="147,98,0,0" VerticalAlignment="Top" Width="165" Click="btnInvia_Click"/>
+        <Image x:Name="logo" Source="images/logoHead.png" Margin="20,130,22,0"></Image>
     </Grid>
 </Window>

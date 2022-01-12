@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace HeadSoccer
 {
@@ -18,32 +19,16 @@ namespace HeadSoccer
         Comunicazione com;
         UdpClient receive;
         IPEndPoint riceveEP;
-        UdpClient client;
+        Condivisa cond;
         public string mioNome { get; set; }
-        public string ipDest { get; set; }
 
         public ComunicazionePlayer(Comunicazione c)
         {
             com = c;
-            client = new UdpClient();
+            
             riceveEP = new IPEndPoint(IPAddress.Any, 0);
             receive = new UdpClient(12346);
-        }
-
-        public void SendPacketWithData(string azione, string dataIn)
-        {
-            string str = string.Empty;
-            if (azione != string.Empty)
-            {
-                str = azione + dataIn;
-                byte[] data = Encoding.ASCII.GetBytes(str);
-                client.Send(data, data.Length, ipDest, 12345);
-            }
-        }
-        private void SendPacketWithoutData(string str)
-        {
-            byte[] data = Encoding.ASCII.GetBytes(str);
-            client.Send(data, data.Length, ipDest, 12345);
+            cond = Condivisa.getInstance();
         }
 
         public void ThreadReceive()
@@ -77,27 +62,27 @@ namespace HeadSoccer
                 {
                     if (MessageBox.Show(nomeAvversario + " ti ha inviato una richiesta di gioco", "Richiesta di gioco", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        ipDest = ipAddress;
+                        SendPacket.ipDest = ipAddress;
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             InputDialog inputDialog = new InputDialog("Inserisci il tuo nome:", "");
                             if (inputDialog.ShowDialog() == true)
                             {
-                                SendPacketWithData("y;", inputDialog.Answer);
+                                SendPacket.SendPacketWithData("y;", inputDialog.Answer);
                             }
                         }));
                     }
                     else
                     {
                         MessageBox.Show("Connessione con: " + nomeAvversario + " rifiutata.", "Connessione rifiutata", MessageBoxButton.OK, MessageBoxImage.Information);
-                        SendPacketWithoutData("n;");
+                        SendPacket.SendPacketWithoutData("n;");
                     }
                 }
                 else if (vs[0].Equals("y") && !vs[1].Equals(""))
                 {
                     if (MessageBox.Show("Vuoi connetterti davvero con: " + nomeAvversario + "?", "Conferma connessione", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        SendPacketWithoutData("y;");
+                        SendPacket.SendPacketWithoutData("y;");
                         MessageBox.Show("Connessione con: " + nomeAvversario + " effettuata, verrai reindirizzato alla selezione del personaggio.", "Connessione effettuata", MessageBoxButton.OK, MessageBoxImage.Information);
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
@@ -107,7 +92,7 @@ namespace HeadSoccer
                     }
                     else
                     {
-                        SendPacketWithoutData("n;");
+                        SendPacket.SendPacketWithoutData("n;");
                     }
                 }
                 else if (vs[0].Equals("y"))
@@ -122,7 +107,8 @@ namespace HeadSoccer
                 // selezione giocatore
                 else if (vs[0].Equals("s"))
                 {
-                    
+                    playerEnemy = new Giocatore(nomeAvversario, new BitmapImage(new Uri(@"images/" + vs[1] + ".png", UriKind.Relative)), 800, 750, 10, playerEnemy.mossaSpeciale);
+                    Condivisa.GetInstance(playerEnemy);
                 }
                 // movimento giocatore
                 else if (vs[0].Equals("a"))

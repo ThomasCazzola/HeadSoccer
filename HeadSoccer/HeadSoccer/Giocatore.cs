@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace HeadSoccer
 {
-    class Giocatore
+    public class Giocatore
     {
         public string Nome { get; set; }
         public BitmapImage Immagine { get; set; }

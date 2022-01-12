@@ -13,11 +13,13 @@
     <Grid>
         <Label x:Name="lbl1" Grid.Column="1" Margin="113,0,113,0" FontSize="22">SELEZIONA GIOCATORE</Label>
         <Image x:Name="players" Grid.Column="1" Grid.Row="1" Stretch="Uniform" Source="images/player1.png"/>
+        <Image x:Name="logoSx" Grid.Column="2" Grid.Row="1" Stretch="Uniform" Source="images/logoHead.png"/>
+        <Image x:Name="logoDx" Grid.Row="1" Stretch="Uniform" Source="images/logoHead.png"/>
 
         <Button x:Name="btnBack" Click="GoBack" Grid.Column="1" Width="150" HorizontalAlignment="Left" Grid.Row="2" Height="35">Indietro</Button>
         <Button x:Name="btnNext" Click="GoNext" Grid.Column="1" Width="150" HorizontalAlignment="Right" Grid.Row="2" Height="35">Prossima</Button>
         <Button x:Name="btnConfirm" Click="Confirm" Grid.Column="1" Width="150" HorizontalAlignment="Center" Grid.Row="2" Height="35">Conferma</Button>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="500"></ColumnDefinition>
