@@ -3,8 +3,6 @@
 -------------------------------
 <img src="HeadSoccer/HeadSoccer/images/logoHead.png" alt="logo head soccer"/>
 
-Link al protocollo di comunicazione -> [PROTOCOLLO](https://github.com/ThomasCazzola/HeadSoccer/protocolloComunicazione.txt)
-
 ## COME FUNZIONA
 1. Fase di connessione tra i due player, dove si inserisce l'indirizzo ip dell'avversario e dopo aver effettuato la connessione si passa alla fase di selezione del giocatore.
 2. Fase di selezione del giocatore, dove si seleziona il giocatore e si passa poi alla fase di gioco.
