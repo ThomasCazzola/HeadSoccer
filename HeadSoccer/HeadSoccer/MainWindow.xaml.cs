@@ -15,7 +15,6 @@ namespace HeadSoccer
     {
         DispatcherTimer gameTimer = new DispatcherTimer(DispatcherPriority.Normal);
         DispatcherTimer tempoRimanente = new DispatcherTimer(DispatcherPriority.Normal);
-        //bool gameOver = false;
         bool goDx, goSx, jumping, superPlayer1, superPlayer2, super, playerHitBall;
         int jumpSpeed = 20;
         Rect playerHitBox, ballHitBox, groundSxHitBox, groundDxHitBox, portaSxHitbox, portaDxHitbox, topSxHitBox, topDxHitBox, latoSxAltoHitBox, latoSxBassoHitBox, latoDxAltoHitbox, latoDxBassoHitBox;
@@ -110,6 +109,23 @@ namespace HeadSoccer
                     superPlayer1 = false;
                 }   
             }
+            if(punteggio.punteggioSquadra1 == 5 && punteggio.punteggioSquadra2 < 5)
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    GameOver gameOver = new GameOver(giocatore.Nome);
+                    gameOver.Show();
+                    this.Close();
+                }));
+            }else if(punteggio.punteggioSquadra2 == 5 && punteggio.punteggioSquadra1 < 5)
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    GameOver gameOver = new GameOver(cond.avversario.Nome);
+                    gameOver.Show();
+                    this.Close();
+                }));
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -168,11 +184,6 @@ namespace HeadSoccer
             Canvas.SetLeft(Palla, palla.pos_X);
             palla.GeneraDirPallaRandom();
             punteggio = new Punteggio(0, 0);
-        }
-
-        private void EndGame()
-        {
-            //gameOver = true;
         }
 
         private void ControlloSlider()

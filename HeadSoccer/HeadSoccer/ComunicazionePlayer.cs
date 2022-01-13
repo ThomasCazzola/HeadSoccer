@@ -25,7 +25,6 @@ namespace HeadSoccer
         public ComunicazionePlayer(Comunicazione c)
         {
             com = c;
-            
             riceveEP = new IPEndPoint(IPAddress.Any, 0);
             receive = new UdpClient(12346);
             cond = Condivisa.getInstance();

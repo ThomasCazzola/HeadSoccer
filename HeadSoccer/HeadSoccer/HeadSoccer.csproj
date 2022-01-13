@@ -61,6 +61,9 @@
     </Compile>
     <Compile Include="ComunicazionePlayer.cs" />
     <Compile Include="Condivisa.cs" />
+    <Compile Include="GameOver.xaml.cs">
+      <DependentUpon>GameOver.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Giocatore.cs" />
     <Compile Include="InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
@@ -72,6 +75,10 @@
     </Compile>
     <Compile Include="SendPacket.cs" />
     <Page Include="Comunicazione.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameOver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
