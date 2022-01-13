@@ -149,7 +149,7 @@ namespace HeadSoccer
                 // fase chiusura
                 else if (vs[0].Equals("e"))
                 {
-
+                    SendPacket window = new SendPacket();
                 }
             }
         }

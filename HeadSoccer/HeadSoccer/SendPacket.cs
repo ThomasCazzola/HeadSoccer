@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HeadSoccer
 {
-    static class SendPacket
+    public class SendPacket
     {
         private static UdpClient client = new UdpClient();
         public static string ipDest { get; set; }
