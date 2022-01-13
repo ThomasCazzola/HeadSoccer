@@ -57,3 +57,5 @@ C:\Users\thoma\OneDrive\Desktop\SCUOLA\HeadSoccer\HeadSoccer\HeadSoccer\HeadSocc
 C:\Users\thoma\OneDrive\Desktop\SCUOLA\HeadSoccer\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.csproj.CoreCompileInputs.cache
 C:\Users\thoma\OneDrive\Desktop\SCUOLA\HeadSoccer\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.exe
 C:\Users\thoma\OneDrive\Desktop\SCUOLA\HeadSoccer\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\HeadSoccer.pdb
+S:\Github\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\GameOver.g.cs
+S:\Github\HeadSoccer\HeadSoccer\HeadSoccer\obj\Debug\GameOver.baml
